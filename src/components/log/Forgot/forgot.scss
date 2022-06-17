@@ -1,0 +1,35 @@
+.forgot{
+    &__top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px 24px 14px;
+        border-bottom: 4px solid #10161B;
+    }
+
+    &__title{
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .svg-close{
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+
+    .svg-back{
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px){
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        min-height: auto;
+        &__title{
+            font-size: 18px;
+        }
+    }
+}

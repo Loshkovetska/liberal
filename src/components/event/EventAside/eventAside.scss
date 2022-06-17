@@ -1,0 +1,352 @@
+.event-aside{
+    width: 336px;
+    background: #15212E;
+    border: 2px solid #10161B;
+
+    &__label{
+        display: flex;
+        align-items: center;
+        font-size: 12px;
+        cursor: pointer;
+        &--switch{
+            color: #FFA526;
+        }
+    }
+
+    &__row{
+        &:first-child{
+            padding: 18px 24px 20px 24px;
+        }
+        padding: 18px 0 20px;
+    }
+
+    &__row-sub{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__row-sub-col{
+        position: relative;
+    }
+
+    &__row-func{
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-func__items{
+        display: flex;
+        .input{
+            outline: none;
+            border: none;
+            width: 90px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0 16px;
+            &:hover, &:focus{
+                outline: none;
+                border: none;
+            }
+
+            &:not(:last-child){
+                margin-right: 8px;
+            }
+        }
+    }
+
+    &-func__item{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 90px;
+        height: 48px;
+        cursor: pointer;
+        transition: 0.9s;
+
+        background: rgba(255, 255, 255, 0.1);
+
+        &:not(:last-child){
+            margin-right: 8px;
+        }
+
+
+        &--active, &:hover{
+            background: #FFA526;
+        }
+    }
+
+    &-func__btns{
+        display: flex;
+
+        .button{
+            &:first-child{
+                margin-right: 8px;
+            }
+        }
+    }
+
+    &-bets__top{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 24px 0 24px;
+    }
+
+    &-bets__table{
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+
+
+        &-row{
+            display: flex;
+            flex-direction: column;
+            &:first-of-type{
+                .event-aside-bets__table-thead{
+                   background: #2253A0; 
+                }
+                .event-aside-bets__table-th{
+                    color: #A8CAFF;
+                }
+                
+            }
+
+
+            &:last-of-type{
+                .event-aside-bets__table-thead{
+                    background: #B83A9C;
+                }
+
+                .event-aside-bets__table-th{
+                    color: #FFB1EE;
+                }
+                
+            }
+
+        }
+
+        &-thead{
+            display: flex;
+            padding: 7px 22px;
+            width: 332px;
+        }
+
+        &-tr{
+            display: flex;
+            padding: 12px 22px;
+        }
+
+        &-th{
+            opacity: 0.7;
+            font-size: 12px;
+            width: 50px;
+            min-width: 50px;
+            text-align: center;
+            &:first-child{
+                flex-grow: 1;
+                width: 104px;
+                min-width: 104px;
+                text-align: left;
+            }
+
+            &:nth-child(3){
+                margin:  0 16px;
+            }
+        }
+
+        &-td{
+            font-size: 12px;
+            width: 50px;
+            min-width: 50px;
+            text-align: center;
+            &:first-child{
+                font-weight: bold;
+                width: 104px;
+                min-width: 104px;
+                text-align: left;
+            }
+
+            &:nth-child(3){
+                display: flex;
+                flex-direction: column;
+                margin:  0 16px;
+            }
+
+            &-val{
+                font-size: 12px;
+                &:last-child{
+                    font-weight: bold; 
+                }
+            }
+        }
+    }
+}
+
+
+
+.event-aside-unbets{
+    border-top: 1px solid #1E3043;
+    padding: 16px 0 20px;
+
+    &__top{
+        padding: 0 24px;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .event-aside{
+        width: 100%;
+
+        &__row-sub{
+            justify-content: flex-start;
+            flex-wrap: wrap;
+
+            &-col{
+                margin-top: 16px;
+            }
+           &-col:first-child{
+               margin-right: 16px;
+           }
+        }
+    }
+
+    .event-aside-bets{
+        &__top{
+            width: 500px;
+
+            .event-aside__row-sub-col{
+                margin-top: 0;
+            }
+        }
+
+        &__table{
+            width: 500px;
+            padding: 0 24px;
+
+            &-thead{
+                width: 100%;
+            }
+            &-tr{
+                width: 100%;
+            }
+
+            &-td:first-child{
+                flex-grow: 1;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 560px){
+    .event-aside-bets{
+        &__top{
+            width: 100%;
+        }
+
+        &__table{
+            width: 100%;
+            padding: 0 24px;
+
+            &-thead{
+                width: 100%;
+            }
+            &-tr{
+                width: 100%;
+            }
+
+            &-td:first-child{
+                flex-grow: 1;
+            }
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 480px){
+    .event-aside-bets{
+        &__table{
+            display: flex;
+
+        }
+
+        &__table-thead{
+            flex-direction: column;
+        }
+
+        &__table-row{
+            flex-direction: row;
+        }
+
+        &__table-tr{
+            flex-direction: column;
+        }
+
+        &__table-td:nth-child(3){
+            flex-direction: row;
+            margin: 0;
+        }
+
+        &__table-td{
+            text-align: left;
+        }
+
+        &__table-td-val:first-child{
+            margin-right: 8px;
+        }
+
+        &__table-th:nth-child(3){
+            margin: 0;
+        }
+
+        &__table-th:first-child{
+            width: 100%;
+            min-width: 100%;
+            flex-grow: 0;
+        }
+
+        &__table-th{
+            text-align: left;
+        }
+
+        &__table-thead{
+            width: auto;
+            padding: 7px 0;
+        }
+
+        &__table-tr{
+            padding: 7px 22px;
+        }
+
+        &__top{
+            justify-content: flex-start;
+
+            .event-content__sub-title{
+                margin-right: 16px;
+            }
+        }
+
+        &__table-row:first-of-type{
+            .event-aside-bets__table-thead{
+                background: transparent;
+            }
+        }
+
+        &__table-row:last-of-type{
+            .event-aside-bets__table-thead{
+                background: transparent;
+            }
+        }
+    }
+
+   .event-aside{
+    &-func__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 40px;
+    }
+   }
+}

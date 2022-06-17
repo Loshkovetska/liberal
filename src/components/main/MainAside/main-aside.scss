@@ -1,0 +1,111 @@
+.main-aside{
+    width: 224px;
+    min-width: 224px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &__content{
+        margin-top: 16px;
+        background: linear-gradient(180deg, #2255A4 0%, #10161B 100%);
+        padding: 16px 12px 16px 0;
+        flex-grow: 1;
+    }
+
+    &__title{
+        font-size: 17px;
+        line-height: 150%;
+        color: #FFFFFF;
+        padding-left: 16px;
+    }
+
+    &__item{
+        cursor: pointer;
+        padding: 16px 0 16px 16px;
+        margin-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        text-decoration: none;
+        border-left: 4px solid transparent;
+
+        &:hover{
+            
+            .main-aside__item-title{
+                color: #F7BD6B;
+            }
+        }
+
+        &--active{
+            border-color: #F7BD6B;   
+        }
+
+        &-title{
+            color: #FFFFFF;
+            display: block;
+            width: 160px;
+            transition: 0.5s;
+
+           
+        }
+
+        &-count{
+            color: #FFFFFF;
+            opacity: 0.5;
+        }
+    }
+
+    @media screen and (max-width: 1397px){
+        width: 100%;
+        min-width: 100%;
+        margin-bottom: 16px;
+
+        &__item{
+            padding: 16px 16px 16px 16px;
+            margin-top: 0;
+        }
+
+        &__item-title{
+            width: 90%;
+        }
+        &__title{
+            cursor: pointer;
+        }
+
+        &__content{
+           visibility: hidden;
+            z-index: 1;
+            position: absolute;
+            left: -16px;
+            top: -17px;
+            height: 100vh;
+            
+            margin-top: 0;
+            transition: 0.5s;
+            transform: translate(-100%, 0);
+
+            &--open{
+                visibility: visible;
+                transform: translate(0%, 0);
+            }
+        }
+    }
+
+    @media screen and (max-width: 480px){
+        &__list{
+            padding-top: 0;
+        }
+
+        &__title{
+            font-size: 15px;
+        }
+
+        &__item-title, &__item-count{
+            font-size: 13px;
+        }
+
+        &__content{
+            top: -8px;
+        }
+    }
+}
+

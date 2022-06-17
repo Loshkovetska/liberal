@@ -1,0 +1,99 @@
+.select{
+    height: 40px;
+    background: #1B2B3D;
+    padding: 8px 8px 8px 16px;
+    width: 170px;
+    position: relative;
+    cursor: pointer;
+
+    &::after{
+        display: block;
+        position: absolute;
+        right: 8px;
+        top: 6px;
+        content: url("../../../img/icons/mdi_menu-down.svg");
+    }
+
+    &--active{
+        &::after{
+            transform: rotateZ(180deg);
+            top: 0;
+        }
+    }
+
+    &__option{
+        padding: 8px 16px;
+        white-space: nowrap;
+        cursor: pointer;
+        width: 100%;
+        color: #10161B;
+        background: #fff;
+        opacity: 1;
+        display: flex;
+        align-items: center;
+        
+        &:hover{
+            color: #10161B;
+            background: #F7BD6B;
+            opacity: 1;
+        }
+    }
+
+    &__text{
+        color: #fff;
+        position: absolute;
+        z-index: 0;
+    }
+
+    &__labels{
+        width: 170px;
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 1;
+        margin-left: -16px;
+        max-height: 74px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+            height: 1px;
+            border-radius: 14px;
+            cursor: pointer;
+        }
+          
+        &::-webkit-scrollbar-track {
+            background: #2D2D2D;
+            width: 4px;
+            border-radius: 14px;
+        }
+          
+        &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            height: 1px;
+            border-radius: 14px;
+        }
+    }
+
+    &__radios{
+        display: none; 
+    }
+    
+    &__radio{
+        display: none;
+    }
+
+    @media screen and (max-width: 480px){
+        width: 150px;
+
+        &__labels{
+            width: 150px;
+            margin-top: 27px;
+        }
+
+        &__text{
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,38 @@
+.account-page{
+    background: #15212E;
+    height: 100%;
+    &__top{
+        border: 2px solid #10161B;
+        display: flex;
+        justify-content: space-between;
+        padding-right: 32px;
+
+        @media screen and (max-width: 480px){
+            padding-right: 16px;
+        }
+
+        @media screen and (max-width: 375px){
+            padding-right: 8px;
+        }
+        @media screen and (max-width: 480px){
+            .button--logout{
+                align-self: center;
+            }
+        }
+    }
+
+    &__main-profile{
+        border: 2px solid #10161B;
+        display: flex;
+
+        @media screen and (max-width: 900px){
+            flex-direction: column-reverse;
+        }
+
+    }
+
+    &__main-bets{
+        width: 100%;
+        border-top: 2px solid #10161B;
+    }
+}

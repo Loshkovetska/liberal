@@ -1,0 +1,256 @@
+.account-bets{
+    height: 100%;
+    background: #15212E;
+    padding: 24px 0 100px 0;
+    &__top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 13px;
+    }
+
+    @media screen and (max-width: 1000px){
+        padding: 24px 24px 100px 24px;
+
+        &__top{
+            padding-left: 0;
+        }
+    }
+
+
+    @media screen and (max-width: 768px){
+        &__top{
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
+
+.account-bets-time{
+    display: flex;
+
+    &__item{
+        width: 88px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+
+        &--active, &:hover{
+            background: #F7BD6B;
+            color: #10161B;
+        }
+    }
+
+    .select{
+        display: none;
+    }
+
+    @media screen and (max-width: 580px){
+        &__item{
+            display: none;
+        }
+
+        .select{
+            display: block;
+        }
+    }
+}
+
+.account-bets-date{
+    width: 200px;
+    display: flex;
+    align-items: center;
+    margin-right: 48px;
+    &__arrow{
+        &-left{
+            width: 16px;
+            min-width: 16px;
+            height: 16px;
+            cursor: pointer;
+            transform: rotateZ(90deg);
+        }
+
+        &-right{
+            width: 16px;
+            min-width: 16px;
+            height: 16px;
+            cursor: pointer;
+            transform: rotateZ(-90deg);
+        }
+    }
+
+    &__value{
+        margin: 0 8px;
+        white-space: nowrap;
+        user-select: none;
+    }
+
+    @media screen and (max-width: 768px){
+        align-self: flex-end;
+        margin-top: 24px;
+        margin-right: 24px;
+    }
+
+    @media screen and (max-width: 375px){
+        align-self: center;
+        margin-top: 24px;
+        margin-right: 0;
+    }
+
+}
+
+.account-bets-table{
+    margin-top: 32px;
+
+    &__vector{
+        cursor: pointer;
+        transition: 0s;
+
+        &--reverse{
+            transform: rotateZ(180deg);
+        }
+    }
+    
+
+    &__thead{
+        display: flex;
+        padding:0 32px;
+        justify-content: space-between;
+    }
+
+    &__th{
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        padding-bottom: 8px;
+
+        &:first-of-type{
+            width: 250px;
+            min-width: 250px;
+        }
+
+        &:nth-child(2),
+        &:nth-child(3){
+            width: 117px;
+            min-width: 117px;
+        }
+
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6),
+        &:last-of-type{
+            min-width: 75px;
+            width: 75px;
+        }
+    }
+
+    &__th-sort{
+        margin-left: 8px;
+    }
+
+    &__row{
+        justify-content: space-between;
+        display: flex;
+        padding: 16px 32px;
+        border-top: 1px solid #1E3043;
+
+        &:last-child{
+            border-bottom: 1px solid #1E3043;
+
+        }
+    }
+
+    &__td{
+        font-size: 16px;
+        &--main{
+            min-width: 250px;
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+
+            .account-bets-table__td-val{
+                font-size: 14px;
+                opacity: 0.5;
+            }
+        }
+
+        &-val, &-title{
+            font-size: 16px;
+        }
+
+        &-val--won{
+            color: #08D51C;
+        }
+
+        &:nth-child(2){
+            white-space: nowrap;
+        }
+        
+        &:nth-child(2),
+        &:nth-child(3){
+            width: 117px;
+            min-width: 117px;
+        }
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6),
+        &:last-child{
+            width: 75px;
+            min-width: 75px;
+        }
+
+    }
+
+    @media screen and (max-width: 1000px){
+        width: 100%;
+        overflow-x:auto;
+        padding: 0 0 24px 0;
+
+        &__thead{
+            width: 952px;
+            padding: 0;
+        }
+
+        &__th{
+           &:nth-child(1){
+                min-width: 220px;
+                width: 220px;
+           }
+        }
+
+        &__td{
+            &--main{
+                min-width: 220px;
+                width: 220px;
+            }
+        }
+
+        &__row{
+            width: 952px;
+           padding-left: 0;
+           padding-right: 0;
+        }
+
+        &::-webkit-scrollbar {
+            width: 1px;
+            height: 4px;
+            border-radius: 14px;
+            cursor: pointer;
+        }
+          
+          &::-webkit-scrollbar-track {
+            background: #2D2D2D;
+            width: 1px;
+            border-radius: 14px;
+          }
+          
+          &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+            height: 4px;
+            border-radius: 14px;
+          }
+    }
+}

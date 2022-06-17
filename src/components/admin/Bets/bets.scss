@@ -1,0 +1,33 @@
+.bets{
+    width: 100%;
+    border-top: 2px solid #10161B;
+    display: flex;
+    padding: 24px 0 32px;
+    flex-direction: column;
+
+    &__top{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 32px;
+    }
+
+    &__top-col{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__count{
+        opacity: 0.5;
+    }
+
+    @media screen and (max-width: 1396px){
+        padding-left: 32px;
+        padding-right: 32px;
+
+        &__top{
+            padding: 0;
+        }
+    }
+}

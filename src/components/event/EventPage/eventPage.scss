@@ -1,0 +1,8 @@
+.event-page{
+    width: 100%;
+    display: flex;
+
+    @media screen and (max-width: 1397px){
+        flex-direction: column;
+    }
+}

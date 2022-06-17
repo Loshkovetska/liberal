@@ -1,0 +1,264 @@
+.account-profile{
+    flex-grow: 1;
+    border: 2px solid #10161B;
+    &__top{
+        padding: 13px 32px 37px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__avatar{
+        position: relative;
+        padding-right: 16px;
+        margin-top: 24px;
+        margin-right: 32px;
+    }
+
+    .file-input{
+        visibility: hidden;
+        position: absolute;
+        width: 0;
+        height: 0;
+    }
+
+    &__image{
+        width: 72px;
+        min-width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #fff;
+
+        .image{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+    }
+
+    &__edit{
+        cursor: pointer;
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #F7BD6B;
+        position: absolute;
+        bottom: 0;
+        right: 0px;
+        border-radius: 50%;
+
+
+        svg{
+            opacity: 1;
+        }
+    }
+
+    &__form{
+        display: flex;
+        flex-grow: 1;
+        flex-wrap: wrap;
+    }
+
+    &__form-edit{
+        cursor: pointer;
+        margin-top: 16px;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        height: 48px;
+        opacity: 0.5;
+        font-size: 12px;
+        margin-left: 24px;
+        svg{
+            opacity: 0.5;
+            margin-right: 8px;
+        }
+    }
+
+    &__input{
+        margin-top: 24px;
+        max-width: 308px;
+        width: 308px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+
+        &:not(:last-child){
+            margin-right: 32px;
+        }
+    }
+
+    .input{
+        width: 100%;
+        height: 48px;
+        color: #10161B;
+        padding: 0 16px;
+        
+
+        outline: none;
+        border: none;
+
+        &:hover, &:focus{
+            outline: none;
+            border: none; 
+        }
+    }
+
+    &__label{
+        font-weight: 600;
+        margin-bottom: 8px;
+
+        .label-svg{
+            cursor: pointer;
+            align-items: center;
+            display: none;
+            opacity: 0.5;
+
+            svg{
+                margin-right: 8px;
+            }
+
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+
+    &__main{
+        padding: 0 32px 32px;
+        border-top: 1px solid #1E3043;
+        border-bottom: 1px solid #1E3043;
+
+        .account-profile__input{
+            margin-top: 24px;
+        }
+        
+    }
+
+    &__linked{
+        display: flex;
+        justify-content: space-between;
+        padding: 24px 32px 32px;
+
+        .button--orange-border{
+            align-self: flex-end;
+        }
+    }
+
+    &__google{
+        display: flex;
+        align-items: center;
+        margin-top: 13px;
+        svg{
+            margin-right: 16px;
+        }
+    }
+
+    &__bottom{
+        border-top: 1px solid #1E3043;
+        padding: 32px 32px 37px ;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__error{
+        font-size: 13px;
+        color: #E20000;
+    }
+
+    &__form-pass{
+        margin-top: 24px;
+        .input{
+            width: 100%;
+        }
+    }
+
+    &__form-input{
+        width: 308px;
+    }
+    &__form-content{
+        display: flex;
+    }
+
+    @media screen and (max-width: 900px){
+        flex-direction: column-reverse;
+    }
+
+    @media screen and (max-width: 768px){
+        .input{
+            height: 40px;
+        }
+    }
+
+    @media screen and (max-width: 735px){
+        &__main{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (max-width: 580px){
+        &__input,&__form-input{
+            max-width: 250px;
+            width: 250px;
+        }
+
+        &__top{
+            padding: 13px 24px 37px;
+        }
+        &__main{
+            padding: 0 24px 32px;
+        }
+
+        &__form{
+            width: 100%;
+        }
+
+        &__input-content{
+            display: flex;
+        }
+    }
+
+    @media screen and (max-width: 480px){
+        &__input,&__form-input{
+            max-width: 100%;
+            width: 100%;
+
+            &:not(:last-child){
+                margin-right: 0;
+            }
+        }
+        
+        &__top{
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        &__linked{
+            flex-direction: column;
+            .button--orange-border{
+                align-self: flex-start;
+                margin-top: 24px;
+            }
+        }
+
+        &__label{
+            display: flex;
+            justify-content: space-between;
+            .label-svg{
+                display: flex;
+            }
+        }
+
+        &__form-edit{
+            display: none;
+        }
+
+        .button--orange{
+            width: 100%;
+        }
+    }
+}

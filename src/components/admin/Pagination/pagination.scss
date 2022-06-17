@@ -1,0 +1,85 @@
+.bets-pagination{
+    margin-top: 39px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+
+    &__btns{
+        display: flex;
+        align-items: center;
+    }
+    &__content{
+        white-space: nowrap;
+        margin: 0 32px;
+        line-height: 21px;
+        display: flex;
+        align-items: center;
+
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    &__input{
+        width: 56px;
+        height: 40px;
+        font-size: 16px;
+        line-height: 24px;
+        background: #1B2B3D;
+        outline: none;
+        border: none;
+        margin: 0 16px;
+        padding: 8px 16px;
+
+        &:hover, &:focus{
+            outline: none;
+            border: none;
+        }
+    }
+
+    &__count{
+        line-height: 21px;
+
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.5);
+        .select{
+            margin-left: 16px;
+            width: 80px;
+            &__labels{
+                width: 80px;
+            }
+        }
+    }
+
+    @media screen and (max-width:1396px){
+        padding: 0;
+    }
+
+    @media screen and (max-width: 570px){
+        flex-direction: column;
+
+        &__btns{
+            align-self: flex-start;
+        }
+
+        &__count{
+            margin-top: 16px;
+            align-self: flex-start;
+        }
+    }
+
+    @media screen and (max-width: 480px){
+
+        &__btns{
+            align-self: center;
+        }
+
+        &__content{
+            margin: 0 16px;
+        }
+
+        &__count{
+            align-self: flex-end;
+        }
+    }
+}
