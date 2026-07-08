@@ -1,58 +1,45 @@
 {
   "name": "liberalplays",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.15",
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
-    "@types/react-table": "^7.7.9",
-    "classnames": "^2.3.1",
-    "eslint-config-react-typescript": "^1.0.8",
-    "mobx": "^6.3.9",
-    "mobx-react": "^7.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router": "^6.2.1",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
-    "sass": "^1.45.1",
-    "save-dev": "^0.0.1-security",
-    "typescript": "^4.5.4",
-    "web-vitals": "^2.1.2"
+    "@tailwindcss/vite": "^4.3.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-table": "^7.7.20",
+    "class-variance-authority": "^0.7.1",
+    "eslint-config-react-typescript": "^1.0.10",
+    "mobx": "^6.16.1",
+    "mobx-react": "^9.2.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router": "^8.1.0",
+    "react-router-dom": "^7.18.1",
+    "react-scripts": "5.0.1",
+    "sass": "^1.101.0",
+    "save-dev": "0.0.1-security",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.2",
+    "typescript": "^6.0.3",
+    "web-vitals": "^5.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.9",
-    "eslint": "^8.5.0",
-    "eslint-config-react-app": "^7.0.0",
-    "prettier": "^2.4.1"
+    "@tailwindcss/postcss": "^4.3.2",
+    "@types/react-router-dom": "^5.3.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "eslint": "^10.6.0",
+    "eslint-config-react-app": "^7.0.1",
+    "prettier": "^3.9.4",
+    "vite": "^8.1.3"
   }
 }

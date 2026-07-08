@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+  body {
+    @apply text-white transition-all duration-500 h-full min-w-[320px] bg-primary;
+  }
+}
+
+@layer utilities {
+  .no-spinner::-webkit-outer-spin-button,
+  .no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .no-spinner {
+    -moz-appearance: textfield;
+  }
+}
+
+@theme {
+  --color-foreaground: #fff;
+  --color-foreaground2: #181818;
+  --color-foreaground3: #15212e;
+  --color-foreaground4: #1a3865;
+  --color-foreaground5: #1e3043;
+  --font-poppins: Poppins;
+  --color-primary: #10161b;
+  --color-primary-light: #111a24;
+  --color-primary-dark: #2c3743;
+  --color-primary2: #2255a4;
+  --color-secondary: #f7bd6b;
+  --color-error: #e20000;
+  --color-error-dark: #720202;
+  --color-info: #2253a0;
+  --color-info-light: #a8caff;
+  --color-success: #08d51c;
+  --color-purple: #b83a9c;
+  --color-purple-light: #ffb1ee;
+  --shadow-link: 0 19px 13px 4px rgba(0, 0, 0, 46%);
+}
+
+input[type="date"] {
+  padding-right: 8px !important;
+  &::-webkit-datetime-edit {
+    color: transparent;
+  }
+
+  &.input--date {
+    &::-webkit-datetime-edit {
+      color: #10161b;
+    }
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url("../assets/icons/uiw_date.svg") no-repeat;
+  width: 16px;
+  height: 16px;
+  border-width: thin;
+}

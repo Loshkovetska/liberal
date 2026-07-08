@@ -1,48 +1,36 @@
-import AccountPage from "./components/account/AccountPage";
-import EventPage from "./components/event/EventPage";
-import MainPage from "./components/main/MainPage"
-import AdminPage from "./components/admin/AdminPage";
-import Policy from "./components/Policy";
+import Main from "@/components/common/main";
+import EventPage from "@/components/pages/event-page";
+import MainPage from "@/components/pages/main-page";
+import NotFound from "@/components/pages/not-found-page";
+import Policy from "@/components/pages/policy";
+import { RouteObject } from "react-router";
 
-export type RouteType = {
-    path: string
-    component: any
-}
-  
-const unAuthUser: Array<RouteType> = [
-  { path: '/', component: <MainPage/>},
-  { path: '/event/:id', component: <EventPage/>},
-  { path: '/policy/privacy', component: <Policy/>},
-  { path: '/policy/rules', component: <Policy/>},
-  { path: '/policy/terms', component: <Policy/>},
-]
+const routes: Array<RouteObject> = [
+  {
+    path: "/",
+    element: <Main />,
+    children: [
+      { index: true, element: <MainPage /> },
+      { path: "/event/:id", element: <EventPage /> },
+      { path: "/policy/privacy", element: <Policy type="privacy" /> },
+      { path: "/policy/rules", element: <Policy type="rules" /> },
+      { path: "/policy/terms", element: <Policy type="terms" /> },
+      // {
+      //   path: "/account",
+      //   children: [
+      //     { path: "/profile", element: <AccountPage type="profile" /> },
+      //     { path: "/bet-history", element: <AccountPage type="bets" /> },
+      //   ],
+      // },
+      // { path: "/users", element: <AdminPage type="users" /> },
+      // { path: "/bets", element: <AdminPage type="bets" /> },
+    ],
+  },
+  { path: "*", element: <NotFound /> },
 
-const usersRoutes: Array<RouteType> = [
-  { path: '/', component: <MainPage/>},
-  { path: '/event/:id', component: <EventPage/>},
-  { path: '/account/profile', component: <AccountPage/>},
-  { path: '/account/bet-history', component: <AccountPage/>},
-  { path: '/policy/privacy', component: <Policy/>},
-  { path: '/policy/rules', component: <Policy/>},
-  { path: '/policy/terms', component: <Policy/>},
-]
-
-const adminRoutes: Array<RouteType> = [
-  { path: '/', component: <MainPage/>},
-  { path: '/users', component: <AdminPage/>},
-  { path: '/bets', component: <AdminPage/>},
-  { path: '/policy/privacy', component: <Policy/>},
-  { path: '/policy/rules', component: <Policy/>},
-  { path: '/policy/terms', component: <Policy/>},
-]
-
-const routes: any = {
-    unAuthUser: unAuthUser,
-    usersRoutes:usersRoutes,
-    adminRoutes:adminRoutes
-}
-
-
-
+  // // for admins
+  // { path: "/users", element: <AdminPage /> },
+  // { path: "/bets", element: <AdminPage /> },
+];
 
 export default routes;

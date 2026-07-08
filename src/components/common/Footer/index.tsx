@@ -1,35 +1,37 @@
-import "./footer.scss";
+import Social from "@/components/common/footer/social-list";
+import { footerContent } from "@/lib/constants/footer";
+import { Link } from "react-router";
 
-import img from "../../../img/Group28.png";
-import img1 from "../../../img/Group29.png";
-import img2 from "../../../img/Group30.png";
-import Social from "../Social";
-import { Link } from "react-router-dom";
-
-const Footer = ()=>{
-
-    return <footer className="footer">
-        <div className="footer__row">
-            <div className="footer__social">
-                <Social/>
-            </div>
-            <div className="footer__info">
-                <div className="footer__info-item">
-                   <img src={img} alt="" className="footer__info-img"/> 
-                </div>
-                <div className="footer__info-item">
-                <img src={img1} alt="" className="footer__info-img"/>
-                </div>
-                <div className="footer__info-item">
-                   <img src={img2} alt="" className="footer__info-img"/> 
-                </div>
-            </div>
+const Footer = () => {
+  return (
+    <footer className="w-full p-4 flex flex-col gap-15 max-sm:gap-8">
+      <div className="flex justify-between max-md:flex-col max-md:items-center max-md:justify-center max-md:gap-6">
+        <div className="flex items-center gap-8 max-sm:gap-6">
+          <Social list={footerContent.social} />
         </div>
-        <div className="footer__row">
-            <p className="footer__text">©  Liberalplay. 2021</p>
-            <Link to="/policy/privacy" className="footer__link footer__link--policy">Privacy Policy</Link>
+        <div className="flex gap-8 max-sm:gap-6">
+          {footerContent.logos.map((logo) => (
+            <img
+              src={logo}
+              key={logo}
+              className="size-full"
+            />
+          ))}
         </div>
+      </div>
+      <div className="flex justify-between items-end max-md:flex-col max-md:items-center max-md:justify-center">
+        <p className="text-sm text-white max-sm:text-xs">
+          {footerContent.copyright}
+        </p>
+        <Link
+          to={footerContent.policy.url}
+          className="text-white underline max-sm:text-xs hover:text-primary2 max-md:mt-2"
+        >
+          {footerContent.policy.title}
+        </Link>
+      </div>
     </footer>
-}
+  );
+};
 
 export default Footer;
