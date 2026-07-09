@@ -3,17 +3,6 @@ import mocks from "./mocks";
 
 const betApi = {
   async placeBet(bet: any) {
-    // const status = "addbet"
-    // const fd = new FormData();
-    //fd.append("bet",bet);
-    // fd.append("status",status);
-
-    // const responseRaw = await fetch("https://iwanttodig.romura.space/backend/tests/bd/areas/", {
-    //     method: 'POST',
-    //     body: fd
-    //   })
-    //   return await responseRaw.json();
-
     return new Promise<{ bets: Bet[] }>((resolve, reject) => {
       resolve({
         bets: mocks.bets,
@@ -21,17 +10,6 @@ const betApi = {
     });
   },
   async getBets(param: any) {
-    // const status = "bets"
-    // const fd = new FormData();
-    //fd.append("dt",param);
-    // fd.append("status",status);
-
-    // const responseRaw = await fetch("https://iwanttodig.romura.space/backend/tests/bd/areas/", {
-    //     method: 'POST',
-    //     body: fd
-    //   })
-    //   return await responseRaw.json();
-
     return new Promise<{ bets: Bet[] }>((resolve, reject) => {
       let res: any = [];
       if (param && param.time) {
@@ -94,33 +72,11 @@ const betApi = {
     });
   },
   async getBetByParams(bet: any) {
-    // const status = "getbet"
-    // const fd = new FormData();
-    //fd.append("bet",bet);
-    // fd.append("status",status);
-
-    // const responseRaw = await fetch("https://iwanttodig.romura.space/backend/tests/bd/areas/", {
-    //     method: 'GET',
-    //     body: fd
-    //   })
-    //   return await responseRaw.json();
-
     return new Promise<Bet>((resolve, reject) => {
       resolve(mocks.bets[0]);
     });
   },
   async deleteBet(id: number) {
-    // const status = "delbet"
-    // const fd = new FormData();
-    //fd.append("id",id);
-    // fd.append("status",status);
-
-    // const responseRaw = await fetch("https://iwanttodig.romura.space/backend/tests/bd/areas/", {
-    //     method: 'POST',
-    //     body: fd
-    //   })
-    //   return await responseRaw.json();
-
     return new Promise<{ bets: Bet[] }>((resolve, reject) => {
       resolve({
         bets: mocks.bets,

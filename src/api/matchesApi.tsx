@@ -3,16 +3,6 @@ import mocks from "./mocks";
 
 const matchesApi = {
   async getMatches(param: any): Promise<{ matches: Match[] }> {
-    // const fd = new FormData();
-    // const status = "getmatches";
-    // params && fd.append("dt", params);
-    // fd.append("status", status);
-    // const responseRaw = await fetch("https://iwanttodig.romura.space/backend/tests/bd/areas/", {
-    //     method: 'GET',
-    //     body: fd
-    //   })
-    //   return await responseRaw.json();
-
     return new Promise((resolve, reject) => {
       let matches: any = [];
       switch (param) {
@@ -32,7 +22,6 @@ const matchesApi = {
           });
           break;
         case "Tomorrow":
-          console.log(param);
           matches = mocks.matches.filter((m) => {
             const dt1 = new Date(new Date(m.dateTime).toDateString()).getTime();
             const dt2 = new Date(
@@ -55,16 +44,6 @@ const matchesApi = {
     });
   },
   async getMatchByParams(params: any) {
-    // const fd = new FormData();
-    // const status = "getmatches";
-    //fd.append("dt", params);
-    // fd.append("status", status);
-    // const responseRaw = await fetch("https://iwanttodig.romura.space/backend/tests/bd/areas/", {
-    //     method: 'GET',
-    //     body: fd
-    //   })
-    //   return await responseRaw.json();
-
     return new Promise((resolve, reject) => {
       resolve(mocks.matches.find((m) => m.id === +params.id));
     });

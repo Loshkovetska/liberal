@@ -1,7 +1,7 @@
-import { Edit, Google, User as UserSvg } from "@/assets/icons";
+import { Calendar, Edit, Google, User as UserSvg } from "@/assets/icons";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
-import { classNames, emailValidate, getFormatDate, isEmpty } from "@/lib/utils";
+import { emailValidate, getFormatDate, isEmpty } from "@/lib/utils";
 import UserModel, { updateUser } from "@/stores/user.model";
 import { observable } from "mobx";
 import { observer } from "mobx-react";
@@ -208,12 +208,9 @@ const AccountProfile = observer(() => {
             >
               Birthday date
             </label>
-            <input
-              className={classNames(
-                "input",
-                userData.birthDate.length && "input--date",
-              )}
+            <Input
               type="date"
+              variant="light"
               id="birthDate"
               value={getFormatDate(userData.birthDate)}
               onChange={(e) =>
@@ -222,6 +219,7 @@ const AccountProfile = observer(() => {
                   birthDate: new Date(e.target.value).toString(),
                 })
               }
+              iconRight={<Calendar className="size-5 text-primary" />}
             />
             <span className="text-sm text-error">{errors.birthDate}</span>
           </div>

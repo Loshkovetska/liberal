@@ -19,6 +19,9 @@
   .no-spinner {
     -moz-appearance: textfield;
   }
+  .calendar::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 }
 
 @theme {

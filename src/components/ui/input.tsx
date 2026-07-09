@@ -29,7 +29,7 @@ export default function Input({
       {iconLeft}
       <input
         className={classNames(
-          "no-spinner flex size-full grow bg-transparent hover:outline-none focus-within:outline-none pr-2 placeholder:text-sm placeholder:text-white/50 max-sm:h-10 max-sm:placeholder:text-xs",
+          "no-spinner calendar flex size-full grow bg-transparent hover:outline-none focus-within:outline-none pr-2 placeholder:text-sm placeholder:text-white/50 max-sm:h-10 max-sm:placeholder:text-xs",
           variant === "light" && "text-primary",
           variant === "dark" && "text-white",
         )}
