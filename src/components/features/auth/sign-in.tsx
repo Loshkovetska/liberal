@@ -1,54 +1,32 @@
 import { Eye, Google } from "@/assets/icons";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
+import { useForm } from "@/lib/hooks/use-form";
 import { setForgotState, setState } from "@/stores/auth.model";
 import { login } from "@/stores/user.model";
 import { useState } from "react";
 
 const Login = () => {
-  const [userData, setData] = useState({
-    username: "",
-    password: "",
-  });
-  const [errors, setErrors] = useState({
-    username: "",
-    password: "",
+  const form = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+    rules: {
+      username: ["empty"],
+      password: ["empty"],
+    },
   });
 
   const [passState, setPassState] = useState(false);
 
-  const userLog = () => {
-    const errs = {
-      username: "",
-      password: "",
-    };
-    const { username, password } = userData;
-    if (!username.length) {
-      errs.username = "*Fill field";
-    }
-
-    if (!password.length) {
-      errs.password = "*Fill field";
-    }
-
-    setErrors({
-      ...errs,
-    });
-
-    if (!errs.username.length && !errs.password.length) {
-      login({
-        username,
-        password,
-      });
-    }
+  const userLog = (values: typeof form.defaultValues) => {
+    login(values);
   };
 
-  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  const userData = form.defaultValues;
+  const errors = form.errors;
+
   return (
     <>
       <button className="flex items-center mb-8 gap-4">
@@ -64,9 +42,9 @@ const Login = () => {
           </label>
           <Input
             id="name"
-            name="name"
+            name="username"
             value={userData.username}
-            onChange={onValueChange}
+            onChange={form.onChange}
           />
           <span className="text-sm text-error">{errors.username}</span>
         </div>
@@ -88,7 +66,7 @@ const Login = () => {
               />
             }
             value={userData.password}
-            onChange={onValueChange}
+            onChange={form.onChange}
           />
           <span className="text-sm text-error">{errors.password}</span>
         </div>
@@ -105,7 +83,7 @@ const Login = () => {
       <Button
         variant="log"
         className="w-[140px] mt-10"
-        onClick={userLog}
+        onClick={form.handleSubmit(userLog)}
       >
         Login
       </Button>

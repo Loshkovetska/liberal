@@ -9,9 +9,9 @@ const Menu = observer(() => {
   return (
     <Button
       onClick={menuModel.setState}
-      className="w-20.5 h-20 hidden max-xl:flex max-sm:w-17.5 max-sm:h-15"
+      className="w-20.5 h-20 hidden max-xl:flex max-sm:w-17.5 max-sm:h-15 text-white"
     >
-      {!isOpen ? <MenuSvg /> : <Close className="rotate-z-45" />}
+      {!isOpen ? <MenuSvg /> : <Close className="size-8" />}
     </Button>
   );
 });

@@ -1,7 +1,7 @@
 import { observable, runInAction } from "mobx";
 import api from "../api";
 import { setForgotState, setState } from "./auth.model";
-import { User } from "./types";
+import { GetUsersParams, User } from "./types";
 
 type UserType = {
   user: null | User;
@@ -116,9 +116,9 @@ export const deleteUser = async (id: number) => {
   } catch (e) {}
 };
 
-export const getUsers = async () => {
+export const getUsers = async (params: GetUsersParams) => {
   try {
-    const { users } = await api.user.getUsers();
+    const { users } = await api.user.getUsers(params);
     runInAction(() => {
       UserModel.users = users;
     });

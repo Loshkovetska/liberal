@@ -1,21 +1,28 @@
 import Pagination from "@/components/common/pagination";
 import BetModel, { getBets } from "@/stores/bet.model";
+import { BetsSortBy } from "@/stores/types";
 import { observer } from "mobx-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import BetsTable from "./bets-table";
 
 const Bets = observer(() => {
-  const { bets } = BetModel;
+  const { bets: betsResponse } = BetModel;
   const [pageSize, setPageSize] = useState(5);
   const [pageIndex, setPageIndex] = useState(0);
-  useEffect(() => {
-    getBets(null);
-  }, []);
+  const [sortBy, setSortBy] = useState<{
+    sortBy: BetsSortBy | null;
+    sortAsc: boolean;
+  }>({ sortAsc: false, sortBy: null });
 
-  const paginatedData = useMemo(
-    () => bets?.slice(pageSize * pageIndex, pageSize * (pageIndex + 1)),
-    [bets, pageIndex, pageSize],
-  );
+  useEffect(() => {
+    getBets({
+      ...sortBy,
+      pageIndex,
+      pageSize,
+    });
+  }, [sortBy, pageSize, pageIndex]);
+
+  const bets = betsResponse?.data;
 
   if (!bets) return null;
   return (
@@ -26,9 +33,12 @@ const Bets = observer(() => {
           <span className="opacity-50">Total: {bets?.length}</span>
         </div>
       </div>
-      <BetsTable bets={paginatedData} />
+      <BetsTable
+        bets={bets}
+        onSort={(s, asc) => setSortBy({ sortBy: s, sortAsc: asc })}
+      />
       <Pagination
-        total={(bets ?? []).length}
+        total={betsResponse?.total}
         pageIndex={pageIndex}
         pageSize={pageSize}
         onPageIndex={setPageIndex}

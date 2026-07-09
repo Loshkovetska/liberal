@@ -7,9 +7,9 @@ import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import DateTimer from "./date-timer";
-import EventTable from "./event-table";
-import EventAside from "./event-side";
 import EventBet from "./event-bet";
+import EventAside from "./event-side";
+import EventTable from "./event-table";
 
 export type EventRate = {
   rat?: Rate;
@@ -86,7 +86,7 @@ const EventContent = observer(() => {
                   variant="close"
                   onClick={() => setShow(false)}
                 >
-                  <Close />
+                  <Close className="size-6" />
                 </Button>
               </div>
               <EventTable

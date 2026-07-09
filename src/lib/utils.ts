@@ -23,7 +23,7 @@ export const emailValidate = (email: string) => {
 };
 
 export const isEmpty = (str: string) => {
-  return !str.length ? false : true;
+  return !str.length ? true : false;
 };
 
 export const getFormatDate = (date: string) => {
@@ -57,11 +57,8 @@ export const sortByNumber = (a: number, b: number, state: boolean) => {
   return state ? a - b : b - a;
 };
 
-export const getAverage = (arr: Array<number>) => {
-  let average = 0;
-  arr.forEach((it) => (average += it));
-
-  return average;
+export const getAverage = (arr: number[]) => {
+  return arr.reduce((prev, c) => prev + c, 0);
 };
 
 export const classNames = (...cls: ClassNameValue[]) => twMerge(cls);

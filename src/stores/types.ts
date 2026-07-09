@@ -80,3 +80,45 @@ export type Game = {
   src: any;
   link: string;
 };
+
+export type PlaceBetBody = {
+  userId?: number;
+  idPlayer: string;
+  idMatch: string;
+  stake: number;
+  rate: number;
+};
+
+export type BetsSortBy =
+  | "event-date"
+  | "bet-for"
+  | "staking-plan"
+  | "odds"
+  | "stake"
+  | "profit"
+  | "result"
+  | "user";
+
+export type GetBetsParams = {
+  userId?: number;
+  time?: string;
+  date?: { min: string; max: string };
+  sortBy?: BetsSortBy;
+  sortAsc?: boolean;
+  pageIndex?: number;
+  pageSize?: number;
+};
+
+export type BetsResponse = {
+  data: Bet[];
+  pageIndex: number;
+  pageSize: number;
+  total: number;
+};
+
+export type UsersSortBy = "user" | "login" | "email" | "bdate" | "balance";
+
+export type GetUsersParams = {
+  sortBy?: UsersSortBy;
+  sortAsc?: boolean;
+};

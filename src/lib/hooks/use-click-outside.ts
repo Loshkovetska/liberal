@@ -7,9 +7,13 @@ export function useClickOutside(
 ) {
   useEffect(() => {
     if (!elementRef.current || !isOpen) {
+      document.body.style.overflow = "auto";
+
       document.removeEventListener("mousedown", checkIfClickedOutside);
       return;
     }
+
+    document.body.style.overflow = "hidden";
 
     document.addEventListener("mousedown", checkIfClickedOutside);
 
@@ -20,6 +24,7 @@ export function useClickOutside(
 
   function checkIfClickedOutside(e: MouseEvent) {
     if (isOpen && !elementRef.current.contains(e.target as Node)) {
+      document.body.style.overflow = "auto";
       handler();
     }
   }

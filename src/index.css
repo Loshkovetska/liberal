@@ -2,10 +2,13 @@
 
 @layer base {
   html {
-    @apply h-full;
+    @apply min-h-full flex flex-col grow;
   }
   body {
-    @apply text-white transition-all duration-500 h-full min-w-[320px] bg-primary;
+    @apply text-white transition-all duration-500 min-h-full flex flex-col grow min-w-[320px] bg-primary;
+  }
+  #root {
+    @apply min-h-full flex flex-col grow;
   }
 }
 

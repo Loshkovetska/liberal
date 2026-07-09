@@ -8,7 +8,10 @@ const AccountPage = ({ type }: { type: "profile" | "bets" }) => {
   return (
     <section className="bg-foreaground3 h-full">
       <div className="border-2 border-primary flex items-center justify-between pr-8 max-sm:pr-4 max-[375px]:pr-2">
-        <AccountTabs role="user" />
+        <AccountTabs
+          role="user"
+          defaultTab={type === "profile" ? 0 : 1}
+        />
         <LogOut />
       </div>
       {type === "profile" ? (

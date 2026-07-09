@@ -51,7 +51,7 @@ const Auth = observer(() => {
             variant="close"
             onClick={setState}
           >
-            <Close className="size-6 text-secondary" />
+            <Close className="size-6" />
           </Button>
         </div>
         {UserModel.message.length > 0 && (

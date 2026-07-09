@@ -25,11 +25,7 @@ const MainAside = observer(() => {
   )?.section;
 
   const getCount = (title: string) => {
-    let count = 0;
-    if (matches) {
-      count = matches.filter((m) => m.section === title).length;
-    }
-    return count;
+    return matches?.filter((m) => m.section === title).length ?? 0;
   };
 
   useClickOutside(menuState.isOpen, asideRef, menuModel.setState);
@@ -42,8 +38,8 @@ const MainAside = observer(() => {
       <Search />
       <div
         className={classNames(
-          "mt-4 bg-linear-180 from-[#2256a400] to-primary py-4 pr-3 grow max-xl:invisible max-xl:z-1 max-xl:absolute max-xl:-left-4 max-xl:-top-4 transition-all duration-500 max-xl:mt-0 max-xl:-translate-y-full",
-          menuState.isOpen && "max-xl:visible max-xl:translate-0",
+          "mt-4 max-xl:bg-primary bg-linear-180 from-[#2256a400] max-xl:h-screen to-primary py-4 pr-3 grow max-xl:invisible max-xl:z-1 max-xl:absolute max-xl:-left-4 max-xl:-top-4 transition-all duration-500 max-xl:mt-0 max-xl:-translate-x-full",
+          menuState.isOpen && "max-xl:visible max-xl:translate-x-0",
         )}
       >
         <h2 className="text-lg text-white pl-4 max-sm:text-base">

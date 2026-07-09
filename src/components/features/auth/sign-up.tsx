@@ -1,66 +1,37 @@
 import { Eye } from "@/assets/icons";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
+import { useForm } from "@/lib/hooks/use-form";
 import { register } from "@/stores/user.model";
 import { observer } from "mobx-react";
 import { useState } from "react";
 
 const Register = observer(() => {
-  const [userData, setData] = useState({
-    username: "",
-    password: "",
-    repeatPass: "",
-  });
-  const [errors, setErrors] = useState({
-    username: "",
-    password: "",
-    repeatPass: "",
+  const form = useForm({
+    defaultValues: {
+      username: "",
+      password: "",
+      repeatPass: "",
+    },
+    rules: {
+      username: ["empty"],
+      password: ["empty"],
+      repeatPass: ["empty", "match_passwords"],
+    },
   });
 
   const [passState, setPassState] = useState(false);
   const [repPassState, setRepPassState] = useState(false);
-  const userReg = () => {
-    const errs = {
-      username: "",
-      password: "",
-      repeatPass: "",
-    };
-    const { username, password, repeatPass } = userData;
-    if (!username.length) {
-      errs.username = "*Fill field";
-    }
-
-    if (!password.length) {
-      errs.password = "*Fill field";
-    }
-
-    if (!repeatPass.length) {
-      errs.repeatPass = "*Fill field";
-    }
-
-    if (repeatPass !== password && repeatPass.length) {
-      errs.repeatPass = "*Password mismatch";
-    }
-
-    setErrors({
-      ...errs,
+  const userReg = (values: typeof form.defaultValues) => {
+    const { username, password } = values;
+    register({
+      username,
+      password,
     });
-
-    if (
-      !errs.username.length &&
-      !errs.password.length &&
-      !errs.repeatPass.length
-    ) {
-      register({
-        username,
-        password,
-      });
-    }
   };
 
-  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const userData = form.defaultValues;
+  const errors = form.errors;
 
   return (
     <>
@@ -74,9 +45,9 @@ const Register = observer(() => {
           </label>
           <Input
             id="name"
-            name="name"
+            name="username"
             value={userData.username}
-            onChange={onValueChange}
+            onChange={form.onChange}
           />
           <span className="text-sm text-error">{errors.username}</span>
         </div>
@@ -92,7 +63,7 @@ const Register = observer(() => {
             name="password"
             type={!passState ? "password" : "text"}
             value={userData.password}
-            onChange={onValueChange}
+            onChange={form.onChange}
             iconRight={<Eye onClick={() => setPassState(!passState)} />}
           />
           <span className="text-sm text-error">{errors.password}</span>
@@ -106,10 +77,10 @@ const Register = observer(() => {
           </label>
           <Input
             id="reppassword"
-            name="reppassword"
+            name="repeatPass"
             type={!passState ? "password" : "text"}
             value={userData.repeatPass}
-            onChange={onValueChange}
+            onChange={form.onChange}
             iconRight={<Eye onClick={() => setRepPassState(!repPassState)} />}
           />
           <span className="text-sm text-error">{errors.repeatPass}</span>
@@ -118,7 +89,7 @@ const Register = observer(() => {
       <Button
         variant="log"
         className="w-[140px] mt-10"
-        onClick={userReg}
+        onClick={form.handleSubmit(userReg)}
       >
         Create account
       </Button>

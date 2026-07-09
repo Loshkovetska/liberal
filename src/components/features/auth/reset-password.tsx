@@ -1,34 +1,23 @@
 import { ArrowLeft, Close } from "@/assets/icons";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
-import { emailValidate } from "@/lib/utils";
+import { useForm } from "@/lib/hooks/use-form";
 import { setForgotState, setState } from "@/stores/auth.model";
 import { newPass } from "@/stores/user.model";
 import { observer } from "mobx-react";
-import { useState } from "react";
 
 const Forgot = observer(() => {
-  const [email, setEmail] = useState({
-    text: "",
-    error: "",
+  const form = useForm({
+    defaultValues: { email: "" },
+    rules: { email: ["empty", "email"] },
   });
 
-  const getPass = () => {
-    let err = "";
-    if (!email.text.length) {
-      err = "*Fill field";
-    }
-
-    if (!emailValidate(email.text) && email.text.length) {
-      err = "*Invalid email";
-    }
-
-    if (!err.length) {
-      newPass(email.text);
-      setEmail({ error: err, text: "" });
-    }
-    setEmail({ ...email, error: err });
+  const getPass = (values: typeof form.defaultValues) => {
+    newPass(values.email);
   };
+
+  const formData = form.defaultValues;
+  const errors = form.errors;
 
   return (
     <div
@@ -67,22 +56,17 @@ const Forgot = observer(() => {
             </label>
             <Input
               id="name"
-              value={email.text}
+              value={formData.email}
               type="email"
               name="email"
-              onChange={(e) =>
-                setEmail({
-                  ...email,
-                  text: e.target.value,
-                })
-              }
+              onChange={form.onChange}
             />
-            <span className="text-sm text-error">{email.error}</span>
+            <span className="text-sm text-error">{errors.email}</span>
           </div>
           <Button
             variant="log"
             className="w-45 mt-10"
-            onClick={getPass}
+            onClick={form.handleSubmit(getPass)}
           >
             Send new password
           </Button>

@@ -51,7 +51,7 @@ export function Tabs({
       <div
         className={classNames(
           "flex relative overflow-hidden after:content-[''] after:w-[158px] after:h-1 after:bg-secondary after:absolute after:bottom-0 after:left-0",
-          `translate-[${value * 158}px] max-sm:translate-[${value * 130}px] max-[375px]:translate-[${value * 120}px]`,
+          `after:translate-x-[${value * 158}px] after:max-sm:translate-x-[${value * 130}px] after:max-[375px]:translate-x-[${value * 120}px]`,
           className,
         )}
         {...props}

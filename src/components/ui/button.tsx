@@ -18,7 +18,7 @@ const buttonVariants = cva(
         orange:
           "h-12 bg-secondary hover:bg-foreaground2 hover:text-secondary max-sm:h-10",
         logout: "opacity-50 hover:opacity-100 max-sm:[&>.btn-text]:hidden",
-        close: "",
+        close: "text-secondary",
       },
     },
   },

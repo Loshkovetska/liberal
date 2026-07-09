@@ -1,10 +1,10 @@
 import { observable, runInAction } from "mobx";
 import api from "../api";
-import { Bet } from "./types";
+import { Bet, BetsResponse, GetBetsParams, PlaceBetBody } from "./types";
 
 type BetType = {
-  bets: null | Bet[];
-  bet: null | Bet;
+  bets: BetsResponse | null;
+  bet: Bet | null;
 };
 
 const BetModel: BetType = observable({
@@ -12,25 +12,30 @@ const BetModel: BetType = observable({
   bet: null,
 });
 
-export const placeBet = async (bet: any) => {
+export const placeBet = async (bet: PlaceBetBody) => {
   try {
     const { bets } = await api.bet.placeBet(bet);
     runInAction(() => {
-      BetModel.bets = bets;
+      BetModel.bets = {
+        data: bets,
+        pageIndex: 0,
+        pageSize: bets.length,
+        total: bets.length,
+      };
     });
   } catch (e) {}
 };
 
-export const getBets = async (param: any) => {
+export const getBets = async (param: GetBetsParams) => {
   try {
-    const { bets } = await api.bet.getBets(param);
+    const bets = await api.bet.getBets(param);
     runInAction(() => {
       BetModel.bets = bets;
     });
   } catch (e) {}
 };
 
-export const getBet = async (bet: any) => {
+export const getBet = async (bet: number) => {
   try {
     const betItem = await api.bet.getBetByParams(bet);
     runInAction(() => {
@@ -39,11 +44,16 @@ export const getBet = async (bet: any) => {
   } catch (e) {}
 };
 
-export const deleteBet = async (id: any) => {
+export const deleteBet = async (id: number) => {
   try {
     const { bets } = await api.bet.deleteBet(id);
     runInAction(() => {
-      BetModel.bets = bets;
+      BetModel.bets = {
+        pageIndex: 0,
+        pageSize: bets.length,
+        total: bets.length,
+        data: bets,
+      };
     });
   } catch (e) {}
 };

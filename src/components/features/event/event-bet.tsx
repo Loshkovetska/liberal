@@ -85,7 +85,7 @@ const EventBet = observer((props: any) => {
           <Button
             variant="clear"
             className="max-sm:mt-4 max-md:mt-6"
-            iconLeft={<Close />}
+            iconLeft={<Close className="size-6 " />}
             onClick={() => {
               setBets({
                 ...bets,

@@ -1,7 +1,8 @@
 import { Calendar, Edit, Google, User as UserSvg } from "@/assets/icons";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
-import { emailValidate, getFormatDate, isEmpty } from "@/lib/utils";
+import { useForm } from "@/lib/hooks/use-form";
+import { getFormatDate } from "@/lib/utils";
 import UserModel, { updateUser } from "@/stores/user.model";
 import { observable } from "mobx";
 import { observer } from "mobx-react";
@@ -14,66 +15,40 @@ export const AccountInfo = observable({
 });
 
 const AccountProfile = observer(() => {
-  const [userData, setData] = useState({
-    avatar: UserModel.user?.avatar || "",
-    name: UserModel.user?.name || "",
-    surname: UserModel.user?.surname || "",
-    userName: UserModel.user?.userName || "",
-    email: UserModel.user?.email || "",
-    password: UserModel.user?.password || "",
-    birthDate: UserModel.user?.birthDate || "",
-    googleAccount: "",
-  });
-
-  const [errors, setError] = useState({
-    name: "",
-    surname: "",
-    userName: "",
-    email: "",
-    password: "",
-    birthDate: "",
+  const form = useForm({
+    defaultValues: {
+      avatar: UserModel.user?.avatar || "",
+      name: UserModel.user?.name || "",
+      surname: UserModel.user?.surname || "",
+      userName: UserModel.user?.userName || "",
+      email: UserModel.user?.email || "",
+      password: UserModel.user?.password || "",
+      birthDate: UserModel.user?.birthDate || "",
+      googleAccount: "",
+    },
+    rules: {
+      avatar: ["optional"],
+      name: ["empty"],
+      surname: ["empty"],
+      userName: ["empty"],
+      email: ["empty", "email"],
+      password: ["empty"],
+      birthDate: ["empty"],
+      googleAccount: ["optional"],
+    },
   });
 
   const [passRead, setRead] = useState(true);
 
   const connectGoogle = () => {};
 
-  const updateData = () => {
-    const inputErrors = {
-      name: !isEmpty(userData.name) ? "*Fill field" : "",
-      surname: !isEmpty(userData.surname) ? "*Fill field" : "",
-      userName: !isEmpty(userData.userName) ? "*Fill field" : "",
-      email: !isEmpty(userData.email)
-        ? "*Fill field"
-        : !emailValidate(userData.email)
-          ? "*Wrong email"
-          : "",
-      password: !isEmpty(userData.password) ? "*Fill field" : "",
-      birthDate: !isEmpty(userData.name) ? "*Fill field" : "",
-    };
-
-    if (
-      !inputErrors.name.length &&
-      !inputErrors.surname.length &&
-      !inputErrors.userName.length &&
-      !inputErrors.email.length &&
-      !inputErrors.password.length &&
-      !inputErrors.birthDate.length
-    ) {
-      updateUser(UserModel.user!.id, {
-        ...userData,
-        dayLimit: AccountInfo.dayLimit,
-        monthLimit: AccountInfo.monthLimit,
-        yearLimit: AccountInfo.yearLimit,
-      });
-      setError({
-        ...inputErrors,
-      });
-    } else {
-      setError({
-        ...inputErrors,
-      });
-    }
+  const updateData = (values: typeof form.defaultValues) => {
+    updateUser(UserModel.user!.id, {
+      ...values,
+      dayLimit: AccountInfo.dayLimit,
+      monthLimit: AccountInfo.monthLimit,
+      yearLimit: AccountInfo.yearLimit,
+    });
   };
 
   const fileHandler = (list: FileList | null) => {
@@ -81,13 +56,13 @@ const AccountProfile = observer(() => {
     if (list) {
       var url = reader.readAsDataURL(list[0]);
       reader.onloadend = function () {
-        setData({
-          ...userData,
-          avatar: reader.result!.toString(),
-        });
+        form.setValue("avatar", reader.result!.toString());
       };
     }
   };
+
+  const userData = form.defaultValues;
+  const errors = form.errors;
 
   return (
     <div className="grow border-2 border-primary">
@@ -128,12 +103,7 @@ const AccountProfile = observer(() => {
               id="name"
               name="name"
               value={userData.name}
-              onChange={(e) =>
-                setData({
-                  ...userData,
-                  name: e.target.value,
-                })
-              }
+              onChange={form.onChange}
             />
             <span className="text-sm text-error">{errors.name}</span>
           </div>
@@ -148,12 +118,7 @@ const AccountProfile = observer(() => {
               id="surname"
               name="surname"
               value={userData.surname}
-              onChange={(e) =>
-                setData({
-                  ...userData,
-                  surname: e.target.value,
-                })
-              }
+              onChange={form.onChange}
             />
             <span className="text-sm text-error">{errors.surname}</span>
           </div>
@@ -170,14 +135,9 @@ const AccountProfile = observer(() => {
             </label>
             <Input
               id="username"
-              name="username"
+              name="userName"
               value={userData.userName}
-              onChange={(e) =>
-                setData({
-                  ...userData,
-                  userName: e.target.value,
-                })
-              }
+              onChange={form.onChange}
             />
             <span className="text-sm text-error">{errors.userName}</span>
           </div>
@@ -192,12 +152,7 @@ const AccountProfile = observer(() => {
               id="email"
               name="email"
               value={userData.email}
-              onChange={(e) =>
-                setData({
-                  ...userData,
-                  email: e.target.value,
-                })
-              }
+              onChange={form.onChange}
             />
             <span className="text-sm text-error">{errors.email}</span>
           </div>
@@ -213,12 +168,7 @@ const AccountProfile = observer(() => {
               variant="light"
               id="birthDate"
               value={getFormatDate(userData.birthDate)}
-              onChange={(e) =>
-                setData({
-                  ...userData,
-                  birthDate: new Date(e.target.value).toString(),
-                })
-              }
+              onChange={form.onChange}
               iconRight={<Calendar className="size-5 text-primary" />}
             />
             <span className="text-sm text-error">{errors.birthDate}</span>
@@ -245,12 +195,7 @@ const AccountProfile = observer(() => {
                 name="password"
                 value={userData.password}
                 readOnly={passRead}
-                onChange={(e) =>
-                  setData({
-                    ...userData,
-                    password: e.target.value,
-                  })
-                }
+                onChange={form.onChange}
               />
             </div>
             <button
@@ -285,7 +230,7 @@ const AccountProfile = observer(() => {
         <Button
           variant="orange"
           className="w-35! max-sm:w-full!"
-          onClick={updateData}
+          onClick={form.handleSubmit(updateData)}
         >
           Save changes
         </Button>

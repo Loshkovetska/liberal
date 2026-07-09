@@ -2,8 +2,14 @@ import { Tab, Tabs } from "@/components/ui/tabs";
 import { accountTabs, adminTabs } from "@/lib/constants/menu";
 import { useState } from "react";
 
-const AccountTabs = ({ role }: { role: string }) => {
-  const [currentTab, setCurrentTab] = useState(0);
+const AccountTabs = ({
+  role,
+  defaultTab,
+}: {
+  role: string;
+  defaultTab?: number;
+}) => {
+  const [currentTab, setCurrentTab] = useState(defaultTab ?? 0);
 
   const getTabs = () => {
     if (role === "user") {
