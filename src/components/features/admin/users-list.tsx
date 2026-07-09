@@ -13,15 +13,6 @@ const UsersList = observer(() => {
     getUsers();
   }, []);
 
-  useEffect(() => {
-    if (show) {
-      (document.querySelector("#root") as Element).classList.add("menu-open");
-    } else
-      (document.querySelector("#root") as Element).classList.remove(
-        "menu-open",
-      );
-  }, [show]);
-
   if (!users) return null;
 
   return (

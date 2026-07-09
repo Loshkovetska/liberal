@@ -10,103 +10,42 @@ import {
 } from "@/components/ui/select";
 import { classNames } from "@/lib/utils";
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
+
+type PaginationProps = {
+  pageSize: number;
+  pageIndex: number;
+  total: number;
+  onPageSize: (v: number) => void;
+  onPageIndex: (v: number) => void;
+};
 
 const Pagination = observer(
-  ({ data, get }: { data: any; get: (val: any) => void }) => {
+  ({
+    pageSize,
+    pageIndex,
+    total,
+    onPageIndex,
+    onPageSize,
+  }: PaginationProps) => {
     const countPages = [5, 10, 15, 20, 50];
 
-    const [paginationOptions, setOptions] = useState({
-      pageCount: Math.ceil(data && data.length / 5),
-      pageSize: 5,
-      pageIndex: 0,
-      canNextPage: false,
-      canPreviousPage: false,
-    });
+    const pageCount = Math.ceil(total / pageSize);
 
-    useEffect(() => {
-      if (data) {
-        const { pageSize, pageIndex } = paginationOptions;
-        const dt = data.slice(pageSize * pageIndex, pageSize * (pageIndex + 1));
-        get(dt);
-      }
-    }, [data, paginationOptions.pageIndex, paginationOptions.pageSize]);
+    const canNextPage = pageIndex + 1 < pageCount;
+    const canPreviousPage = pageIndex - 1 >= 0;
 
-    useEffect(() => {
-      if (!paginationOptions.pageIndex) {
-        setOptions({
-          ...paginationOptions,
-          canPreviousPage: true,
-          canNextPage: false,
-        });
-      }
-
-      if (paginationOptions.pageIndex + 1 === paginationOptions.pageCount) {
-        setOptions({
-          ...paginationOptions,
-          canNextPage: true,
-          canPreviousPage: false,
-        });
-      }
-
-      if (paginationOptions.pageCount === 1) {
-        setOptions({
-          ...paginationOptions,
-          canPreviousPage: true,
-          canNextPage: true,
-        });
-      }
-    }, [paginationOptions.pageIndex, paginationOptions.pageCount]);
-
-    const previousPage = () => {
-      if (!paginationOptions.pageIndex) {
-        setOptions({
-          ...paginationOptions,
-          canPreviousPage: true,
-          canNextPage: false,
-        });
-        return;
-      }
-
-      setOptions({
-        ...paginationOptions,
-        pageIndex: paginationOptions.pageIndex - 1,
-        canPreviousPage: false,
-        canNextPage: false,
-      });
-    };
-
-    const nextPage = () => {
-      if (paginationOptions.pageIndex + 1 === paginationOptions.pageCount) {
-        setOptions({
-          ...paginationOptions,
-          canNextPage: true,
-          canPreviousPage: false,
-        });
-        return;
-      }
-
-      const ind = paginationOptions.pageIndex;
-
-      setOptions({
-        ...paginationOptions,
-        pageIndex: ind + 1,
-        canNextPage: false,
-        canPreviousPage: false,
-      });
-    };
+    const navigate = (amount: number) => onPageIndex(pageIndex + amount);
 
     return (
       <div className="mt-10 flex items-center justify-between px-8 max-xl:px-0 max-md:flex-col max-md:gap-4">
         <div className="flex items-center">
           <Button
-            onClick={previousPage}
+            onClick={() => navigate(-1)}
             className={classNames(
               "text-white hover:text-secondary flex items-center",
-              paginationOptions.canPreviousPage &&
-                "opacity-50 pointer-events-none",
+              !canPreviousPage && "opacity-50 pointer-events-none",
             )}
-            disabled={paginationOptions.canPreviousPage}
+            disabled={!canPreviousPage}
           >
             <span className="max-sm:hidden">Previous</span>
             <ArrowDown className="rotate-90 hidden max-sm:flex" />
@@ -117,24 +56,19 @@ const Pagination = observer(
               variant="dark"
               type="number"
               wrapperClass="w-[56px] h-10 mx-4"
-              value={paginationOptions.pageIndex + 1}
-              max={paginationOptions.pageCount}
+              value={pageIndex + 1}
+              max={pageCount}
               min={1}
-              onChange={(e) => {
-                setOptions({
-                  ...paginationOptions,
-                  pageIndex: +e.target.value - 1,
-                });
-              }}
+              onChange={(e) => onPageIndex(+e.target.value - 1)}
             />
-            of {paginationOptions.pageCount}
+            of {pageCount}
           </div>
           <Button
-            onClick={nextPage}
-            disabled={paginationOptions.canNextPage}
+            onClick={() => navigate(1)}
+            disabled={!canNextPage}
             className={classNames(
               "text-white hover:text-secondary",
-              paginationOptions.canNextPage && "opacity-50 pointer-events-none",
+              !canNextPage && "opacity-50 pointer-events-none",
             )}
           >
             <span className="max-sm:hidden">Next</span>
@@ -145,15 +79,11 @@ const Pagination = observer(
           Show{" "}
           <Select
             className="w-20"
-            value={String(paginationOptions.pageSize)}
-            onValueChange={(val) =>
-              setOptions((prev) => ({
-                ...prev,
-                pageSize: +val,
-                pageCount: Math.ceil(data && data.length / +val),
-                pageIndex: 0,
-              }))
-            }
+            value={String(pageSize)}
+            onValueChange={(val) => {
+              onPageSize(+val);
+              onPageIndex(0);
+            }}
           >
             <SelectTrigger>
               <SelectValue />

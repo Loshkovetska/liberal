@@ -1,15 +1,21 @@
 import Pagination from "@/components/common/pagination";
 import BetModel, { getBets } from "@/stores/bet.model";
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import BetsTable from "./bets-table";
 
 const Bets = observer(() => {
   const { bets } = BetModel;
-  const [showData, setShowData] = useState<any>();
+  const [pageSize, setPageSize] = useState(5);
+  const [pageIndex, setPageIndex] = useState(0);
   useEffect(() => {
     getBets(null);
   }, []);
+
+  const paginatedData = useMemo(
+    () => bets?.slice(pageSize * pageIndex, pageSize * (pageIndex + 1)),
+    [bets, pageIndex, pageSize],
+  );
 
   if (!bets) return null;
   return (
@@ -20,10 +26,13 @@ const Bets = observer(() => {
           <span className="opacity-50">Total: {bets?.length}</span>
         </div>
       </div>
-      <BetsTable bets={showData} />
+      <BetsTable bets={paginatedData} />
       <Pagination
-        data={bets}
-        get={setShowData}
+        total={(bets ?? []).length}
+        pageIndex={pageIndex}
+        pageSize={pageSize}
+        onPageIndex={setPageIndex}
+        onPageSize={setPageSize}
       />
     </div>
   );
