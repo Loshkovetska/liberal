@@ -2,7 +2,7 @@ import Menu from "@/components/common/header/header-menu";
 import UserHeader from "@/components/common/header/user-header";
 import Logo from "@/components/common/logo";
 import Button from "@/components/ui/button";
-import { menuModel } from "@/stores/menu.model";
+import { authModel } from "@/stores/auth.model";
 import { getState } from "@/stores/user.model";
 import { observer } from "mobx-react";
 import { useLocation } from "react-router";
@@ -21,7 +21,7 @@ const Header = observer(() => {
       {!user ? (
         <Button
           variant="log"
-          onClick={menuModel.setState}
+          onClick={authModel.setState}
         >
           Login
         </Button>

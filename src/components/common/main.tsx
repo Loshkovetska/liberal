@@ -1,8 +1,8 @@
-import Footer from "@/components/common/Footer";
+import Footer from "@/components/common/footer";
 import Header from "@/components/common/header";
 import ScrollToTop from "@/components/common/scroll-to-top";
-import Auth from "@/components/log/Auth";
-import Forgot from "@/components/log/Forgot";
+import Auth from "@/components/features/auth";
+import Forgot from "@/components/features/auth/reset-password";
 import { classNames } from "@/lib/utils";
 import { authModel } from "@/stores/auth.model";
 import { observer } from "mobx-react";

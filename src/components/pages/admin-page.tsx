@@ -1,10 +1,10 @@
 import { Logout } from "@/assets/icons";
-import AccountTabs from "@/components/account/AccountTabs";
-import Bets from "@/components/admin/Bets";
-import UsersList from "@/components/admin/UsersList";
+import AccountTabs from "@/components/features/account/account-tabs";
+import Bets from "@/components/features/admin/bets";
+import UsersList from "@/components/features/admin/users-list";
 import Button from "@/components/ui/button";
 import { logOut } from "@/stores/user.model";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const AdminPage = ({ type }: { type: "users" | "bets" }) => {
   const history = useNavigate();

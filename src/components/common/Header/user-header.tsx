@@ -1,36 +1,18 @@
 import { ArrowDown as Arrow, User as UserSvg } from "@/assets/icons";
 import { adminMenuItems, userMenuItems } from "@/lib/constants/menu";
+import { useClickOutside } from "@/lib/hooks/use-click-outside";
 import { classNames } from "@/lib/utils";
 import UserModel from "@/stores/user.model";
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link } from "react-router";
 
 function UserHeader() {
   const { user } = UserModel;
   const [show, setShow] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const checkIfClickedOutside = (e: MouseEvent) => {
-      if (
-        show &&
-        document.querySelector(".user-menu") &&
-        !(document.querySelector(".user-menu") as Element).contains(
-          e.target as Node,
-        ) &&
-        !(document.querySelector(".header__user-info-top") as Element).contains(
-          e.target as Node,
-        )
-      ) {
-        setShow(false);
-      }
-    };
-    document.addEventListener("mousedown", checkIfClickedOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [show]);
+  useClickOutside(show, ref, () => setShow(false));
 
   const getList = () => {
     if (user?.role === "admin") {
@@ -44,7 +26,6 @@ function UserHeader() {
           {user?.avatar ? (
             <img
               src={user?.avatar}
-              alt=""
               className="size-full rounded-full"
             />
           ) : (
@@ -52,7 +33,7 @@ function UserHeader() {
           )}
         </div>
       )}
-      <div>
+      <div ref={ref}>
         <div
           className="flex items-center gap-2 max-sm:gap-1"
           onClick={() => setShow(!show)}

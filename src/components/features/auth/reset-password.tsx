@@ -1,11 +1,11 @@
 import { ArrowLeft, Close } from "@/assets/icons";
 import Button from "@/components/ui/button";
+import Input from "@/components/ui/input";
 import { emailValidate } from "@/lib/utils";
 import { setForgotState, setState } from "@/stores/auth.model";
 import { newPass } from "@/stores/user.model";
 import { observer } from "mobx-react";
 import { useState } from "react";
-import "./forgot.scss";
 
 const Forgot = observer(() => {
   const [email, setEmail] = useState({
@@ -32,14 +32,14 @@ const Forgot = observer(() => {
 
   return (
     <div
-      className="auth-modal"
+      className="w-screen h-screen bg-[rgba(16,22,27,0.8)] fixed overflow-auto inset-0"
       onClick={() => setForgotState()}
     >
       <div
-        className="auth-modal__content forgot"
+        className="w-120 absolute left-1/2 top-1/2 -translate-1/2 bg-foreaground3 rounded"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="forgot__top">
+        <div className="flex justify-between items-center pt-6 px-6 pb-3 border-b-4 border-primary">
           <Button
             variant="close"
             onClick={() => {
@@ -47,29 +47,29 @@ const Forgot = observer(() => {
               setState();
             }}
           >
-            <ArrowLeft className="svg-back" />
+            <ArrowLeft className="size-6" />
           </Button>
-          <h1 className="forgot__title">Forgot password?</h1>
+          <h1 className="text-xl max-sm:text-lg">Forgot password?</h1>
           <Button
             variant="close"
             onClick={setForgotState}
           >
-            <Close className="svg-close" />
+            <Close className="size-6" />
           </Button>
         </div>
-        <div className="auth-modal__form">
-          <div className="auth-modal__input">
+        <div className="px-8 pt-8 pb-10 bg-foreaground3 max-sm:px-4">
+          <div className="flex flex-col">
             <label
               htmlFor="name"
-              className="auth-modal__label"
+              className="font-semibold mb-2"
             >
               E-mail
             </label>
-            <input
-              className="input"
+            <Input
               id="name"
               value={email.text}
               type="email"
+              name="email"
               onChange={(e) =>
                 setEmail({
                   ...email,
@@ -77,11 +77,11 @@ const Forgot = observer(() => {
                 })
               }
             />
-            <span className="auth-modal__error">{email.error}</span>
+            <span className="text-sm text-error">{email.error}</span>
           </div>
           <Button
             variant="log"
-            className="w-45"
+            className="w-45 mt-10"
             onClick={getPass}
           >
             Send new password

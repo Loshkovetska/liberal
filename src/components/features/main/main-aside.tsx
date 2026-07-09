@@ -1,17 +1,20 @@
 import Search from "@/components/common/search";
+import { useClickOutside } from "@/lib/hooks/use-click-outside";
 import { classNames } from "@/lib/utils";
 import MatchModel, { getMatches } from "@/stores/match.model";
 import { menuModel } from "@/stores/menu.model";
 import SportEventModel, { getSportEvents } from "@/stores/sevent.model";
 import { observer } from "mobx-react";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router";
 
 const MainAside = observer(() => {
+  const asideRef = useRef<HTMLDivElement>(null);
   const { sportEvents } = SportEventModel;
   const { matches } = MatchModel;
   const menuState = menuModel.getState();
   const { pathname } = useLocation();
+
   useEffect(() => {
     getMatches(null);
     getSportEvents("Cricket");
@@ -29,8 +32,13 @@ const MainAside = observer(() => {
     return count;
   };
 
+  useClickOutside(menuState.isOpen, asideRef, menuModel.setState);
+
   return (
-    <aside className="min-w-56 max-w-56 max-xl:min-w-full max-xl:max-w-full max-xl:mb-4 flex flex-col relative">
+    <aside
+      ref={asideRef}
+      className="min-w-56 max-w-56 max-xl:min-w-full max-xl:max-w-full max-xl:mb-4 flex flex-col relative"
+    >
       <Search />
       <div
         className={classNames(

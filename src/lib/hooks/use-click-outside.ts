@@ -6,7 +6,7 @@ export function useClickOutside(
   handler: () => void,
 ) {
   useEffect(() => {
-    if (!elementRef.current) {
+    if (!elementRef.current || !isOpen) {
       document.removeEventListener("mousedown", checkIfClickedOutside);
       return;
     }

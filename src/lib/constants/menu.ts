@@ -31,6 +31,28 @@ const authTabs = [
   },
 ];
 
+const accountTabs = [
+  {
+    title: "My account",
+    link: "/account/profile",
+  },
+  {
+    title: "Bet history",
+    link: "/account/bet-history",
+  },
+];
+
+const adminTabs = [
+  {
+    title: "Users List",
+    link: "/users",
+  },
+  {
+    title: "Bets",
+    link: "/bets",
+  },
+];
+
 const docsItems = [
   {
     title: "Privacy Policy",
@@ -46,4 +68,11 @@ const docsItems = [
   },
 ];
 
-export { adminMenuItems, authTabs, docsItems, userMenuItems };
+export {
+  accountTabs,
+  adminMenuItems,
+  adminTabs,
+  authTabs,
+  docsItems,
+  userMenuItems,
+};

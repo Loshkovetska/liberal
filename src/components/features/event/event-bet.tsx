@@ -63,7 +63,7 @@ const EventBet = observer((props: any) => {
         <div className="flex max-md:-ml-1 max-md:flex-wrap">
           {rates.map((r, ind) => (
             <div
-              className="cursor-pointer p-2 h-12 flex items-center justify-center bg-[rgba(255, 255, 255, 0.1)] ml-2 hover:bg-secondary max-md:mt-6 max-md:mx-1 max-sm:mt-4 max-sm:p-2 max-sm:text-xs max-sm:h-10"
+              className="cursor-pointer p-2 h-12 flex items-center justify-center bg-[rgba(255,255,255,0.1)] ml-2 hover:bg-secondary max-md:mt-6 max-md:mx-1 max-sm:mt-4 max-sm:p-2 max-sm:text-xs max-sm:h-10"
               key={ind}
               onClick={() => {
                 let stake = bets.stake;

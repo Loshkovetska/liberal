@@ -1,15 +1,11 @@
-import { Edit, Trash, Vector } from "@/assets/icons";
-import {
-  classNames,
-  sortByName,
-  sortByNumber,
-  tableEngDate,
-} from "@/lib/utils";
+import { Edit, Trash } from "@/assets/icons";
+import { BetHistoryTh } from "@/components/features/account/account-bets-history";
+import { sortByName, sortByNumber, tableEngDate } from "@/lib/utils";
 import { User } from "@/stores/types";
 import UserModel, { deleteUser } from "@/stores/user.model";
 import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
-import UserModal from "../UserModal";
+import UserModal from "./user-modal";
 
 const UsersTable = observer(() => {
   const { users } = UserModel;
@@ -93,70 +89,32 @@ const UsersTable = observer(() => {
   }, [users]);
 
   return (
-    <div className="users-table">
-      <div className="users-table__thead">
-        {theads.map((th, ind) => (
-          <UserTh
-            key={ind}
+    <div className="mt-8 max-xl:w-full max-xl:overflow-x-auto max-xl:pb-6">
+      <div className="grid grid-cols-[200px_160px_260px_220px_120px_50px] px-8 justify-between max-xl:w-272.5 max-xl:px-0 max-xl:grid-cols-[220px_160px_260px_220px_120px_50px]">
+        {theads.map((th) => (
+          <BetHistoryTh
+            key={th.title}
             title={th.title}
-            action={(val: boolean) => th.action(val)}
+            action={th.action}
           />
         ))}
-        <div className="users-table__th"></div>
+        <div className="flex items-center gap-2 text-nowrap font-bold pb-2" />
       </div>
-      {data || (data && !data.length) ? (
-        <>
-          {data.map((u: User, ind: number) => (
-            <UserRow
-              u={u}
-              key={ind}
-            />
-          ))}
-        </>
+      {data?.length > 0 ? (
+        data.map((u: User) => (
+          <UserRow
+            u={u}
+            key={u.id}
+          />
+        ))
       ) : (
-        <div className="users-table__row">No data</div>
+        <div className="flex items-center justify-between px-8">No data</div>
       )}
     </div>
   );
 });
 
 export default UsersTable;
-
-const UserTh = ({
-  action,
-  title,
-}: {
-  action: (val: boolean) => void;
-  title: string;
-}) => {
-  const [sortState, setState] = useState(false);
-
-  return (
-    <div className="users-table__th">
-      {title}
-      <span
-        className="users-table__th-sort"
-        onClick={() => {
-          setState(!sortState);
-          action(sortState);
-        }}
-      >
-        <Vector
-          className={classNames(
-            "users-table__vector",
-            !sortState && "users-table__vector--reverse",
-          )}
-        />
-        <Vector
-          className={classNames(
-            "users-table__vector",
-            sortState && "users-table__vector--reverse",
-          )}
-        />
-      </span>
-    </div>
-  );
-};
 
 const UserRow = ({ u }: { u: User }) => {
   const [show, setShow] = useState(false);
@@ -171,21 +129,19 @@ const UserRow = ({ u }: { u: User }) => {
   }, [show]);
 
   return (
-    <div className="users-table__row">
-      <div className="users-table__td users-table__td--main">
-        {`${u.name} ${u.surname}`}
-      </div>
-      <div className="users-table__td">{u.userName}</div>
-      <div className="users-table__td">{u.email}</div>
-      <div className="users-table__td">{tableEngDate(u.birthDate!)}</div>
-      <div className="users-table__td">£{u.totalBalance?.toFixed(2)}</div>
-      <div className="users-table__td">
+    <div className="grid grid-cols-[200px_160px_260px_220px_120px_50px] max-xl:w-272.5 max-xl:px-0 max-xl:grid-cols-[220px_160px_260px_220px_120px_50px] px-8 py-4 justify-between border-t border-foreaground5 last:border-b">
+      <div className="text-base">{`${u.name} ${u.surname}`}</div>
+      <div className="text-base">{u.userName}</div>
+      <div className="text-base">{u.email}</div>
+      <div className="text-base">{tableEngDate(u.birthDate!)}</div>
+      <div className="text-base">£{u.totalBalance?.toFixed(2)}</div>
+      <div className="text-base flex items-center gap-2">
         <Edit
-          className="svg-edit"
+          className="opacity-50 hover:opacity-100 cursor-pointer size-5"
           onClick={() => setShow(true)}
         />
         <Trash
-          className="svg-del"
+          className="opacity-50 hover:opacity-100 cursor-pointer size-5"
           onClick={() => deleteUser(u.id)}
         />
       </div>
@@ -193,7 +149,6 @@ const UserRow = ({ u }: { u: User }) => {
       {show && (
         <UserModal
           setShow={setShow}
-          mode="edit"
           dt={u}
         />
       )}

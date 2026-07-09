@@ -1,6 +1,7 @@
 import { Edit } from "@/assets/icons";
 import Button from "@/components/ui/button";
 import CheckBox from "@/components/ui/checkbox";
+import Input from "@/components/ui/input";
 import Switch from "@/components/ui/switch";
 import { classNames } from "@/lib/utils";
 import BetModel, { getBet } from "@/stores/bet.model";
@@ -59,7 +60,7 @@ const EventAside = observer(({ match }: { match: Match }) => {
                 <>
                   <button
                     className={classNames(
-                      "flex items-center justify-center w-[90px] h-12 cursor-pointer bg-[rgba(255, 255, 255, 0.1)] hover:bg-secondary max-sm:w-[80px] max-sm:h-10",
+                      "flex items-center justify-center w-[90px] h-12 cursor-pointer bg-[rgba(255,255,255,0.1)] hover:bg-secondary max-sm:w-[80px] max-sm:h-10",
                       activeValue === values.num1 && "bg-secondary",
                     )}
                     onClick={() => setActive(values.num1)}
@@ -68,7 +69,7 @@ const EventAside = observer(({ match }: { match: Match }) => {
                   </button>
                   <button
                     className={classNames(
-                      "flex items-center justify-center w-[90px] h-12 cursor-pointer bg-[rgba(255, 255, 255, 0.1)] hover:bg-secondary max-sm:w-[80px] max-sm:h-10",
+                      "flex items-center justify-center w-[90px] h-12 cursor-pointer bg-[rgba(255,255,255,0.1)] hover:bg-secondary max-sm:w-[80px] max-sm:h-10",
                       activeValue === values.num2 && "bg-secondary",
                     )}
                     onClick={() => setActive(values.num2)}
@@ -77,7 +78,7 @@ const EventAside = observer(({ match }: { match: Match }) => {
                   </button>
                   <button
                     className={classNames(
-                      "flex items-center justify-center w-[90px] h-12 cursor-pointer bg-[rgba(255, 255, 255, 0.1)] hover:bg-secondary max-sm:w-[80px] max-sm:h-10",
+                      "flex items-center justify-center w-[90px] h-12 cursor-pointer bg-[rgba(255,255,255,0.1)] hover:bg-secondary max-sm:w-[80px] max-sm:h-10",
                       activeValue === values.num3 && "bg-secondary",
                     )}
                     onClick={() => setActive(values.num3)}
@@ -87,8 +88,9 @@ const EventAside = observer(({ match }: { match: Match }) => {
                 </>
               ) : (
                 <>
-                  <input
-                    className="w-[90px] h-12 bg-[rgba(255, 255, 255, 0.1)] px-4 focus-within:outline-none active:outline-none hover:outline-none"
+                  <Input
+                    variant="dark"
+                    wrapperClass="w-[90px] bg-[rgba(255,255,255,0.1)]"
                     value={inputs.num1}
                     type="number"
                     max={999999}
@@ -100,8 +102,9 @@ const EventAside = observer(({ match }: { match: Match }) => {
                       })
                     }
                   />
-                  <input
-                    className="w-[90px] h-12 bg-[rgba(255, 255, 255, 0.1)] px-4 focus-within:outline-none active:outline-none hover:outline-none"
+                  <Input
+                    variant="dark"
+                    wrapperClass="w-[90px] bg-[rgba(255,255,255,0.1)]"
                     value={inputs.num2}
                     type="number"
                     max={999999}
@@ -113,8 +116,9 @@ const EventAside = observer(({ match }: { match: Match }) => {
                       })
                     }
                   />
-                  <input
-                    className="w-[90px] h-12 bg-[rgba(255, 255, 255, 0.1)] px-4 focus-within:outline-none active:outline-none hover:outline-none"
+                  <Input
+                    variant="dark"
+                    wrapperClass="w-[90px] bg-[rgba(255,255,255,0.1)]"
                     value={inputs.num3}
                     type="number"
                     max={999999}
